@@ -2,11 +2,8 @@ import '../css/reset.css';
 import '../css/style.css';
 
 // import { format, compareAsc } from 'date-fns';
-// import { v4 as uuidv4} from 'uuid';
 
-import Project from './project';
-
-const p1 = new Project("Test", 123);
+import todoList from './todoList';
 
 const testTodo = {
     title: "Test",
@@ -16,11 +13,19 @@ const testTodo = {
     note: "Test", 
     isComplete: false
 }
+const testTodo2 = {
+    title: "ed",
+    description: "ed",
+    dueDate: "ed",
+    priority: "ed",
+    note: "ed", 
+    isComplete: false
+}
 
+const testProject = {
+    title: "Test",
+}
 
-p1.addTodo(testTodo);
-
-p1.log();
 
 
 

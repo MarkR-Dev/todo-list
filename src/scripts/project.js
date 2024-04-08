@@ -1,5 +1,5 @@
 import Todo from "./todo";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 class Project {
     constructor(title, projectID, todoArray = []) {
@@ -30,6 +30,22 @@ class Project {
 
     removeAllTodos() {
         this.todoArray.length = 0;
+    }
+
+    editTodo(todoID, newTodoData){
+        const index = this.todoArray.findIndex(todo => {
+            return todo.todoID === todoID
+        });
+        
+        if(index >= 0) {
+            const todo = this.todoArray[index];
+            todo.title = newTodoData.title;
+            todo.description = newTodoData.description;
+            todo.dueDate = newTodoData.dueDate;
+            todo.priority = newTodoData.priority;
+            todo.note = newTodoData.note;
+            todo.isComplete = newTodoData.isComplete;
+        }
     }
 
     getTodo(todoID){
