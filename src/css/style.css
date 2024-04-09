@@ -1,0 +1,82 @@
+body {
+    font-family: monospace;
+    /* background-color: white; */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    height: 100px;
+    padding-left: 36px;
+    font-size: 3rem;
+    background-color: peru;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+#main {
+    display: flex;
+    flex-grow: 1;
+}
+
+/* Sidebar */
+
+#sidebar {
+    border-right: 3px solid peru;
+    min-width: 400px;
+} 
+
+#sidebar-project-nav {
+    padding: 20px;
+    border-bottom: 3px solid peru;
+    font-size: 2rem;
+    /* display: flex;
+    flex-direction: column; */
+}
+
+#home {
+    text-align: left;
+    border: none;
+    background-color: transparent;
+    padding: 16px;
+    min-width: 100%;
+    cursor: pointer;
+}
+
+#my-projects-heading {
+    display: flex;
+    gap: 60px;
+    padding: 16px;
+    align-items: center;
+    cursor: default;
+}
+
+#home:hover,
+#my-projects-heading:hover {
+    background-color: rgba(205, 133, 63, 0.2);
+    border-radius: 10px;
+}
+
+#add-project-btn {
+    border: 2px solid;
+    padding: 0 10px;
+    max-height: 50px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.add:hover {
+    color: rgb(15, 172, 15);
+    border-color: rgb(15, 172, 15); 
+}
+
+/* Projects */
+
+#created-project-nav {
+    padding: 20px;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+}
