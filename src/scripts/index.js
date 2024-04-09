@@ -4,6 +4,7 @@ import '../css/style.css';
 // import { format, compareAsc } from 'date-fns';
 
 import todoList from './todoList';
+import { setLocalStorage } from './localStorage';
 
 const testTodo = {
     title: "Test",
@@ -26,7 +27,12 @@ const testProject = {
     title: "Test",
 }
 
-
-
+//move to todolist handler eventually
+window.addEventListener("load", () => {
+    todoList.remakeTodoList();
+});
+window.addEventListener("beforeunload", () => {
+    setLocalStorage(todoList.getProjectArray());
+});
 
 

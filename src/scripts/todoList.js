@@ -1,8 +1,9 @@
 import Project from "./project";
 import { v4 as uuidv4 } from "uuid";
+import { getLocalStorage } from "./localStorage";
 
 const todoList = (function(){
-    const projectArray = [new Project("Home", uuidv4())];
+    const projectArray = getLocalStorage() || [new Project("Home", uuidv4())];
 
     const log = () => {
         console.log(projectArray);
