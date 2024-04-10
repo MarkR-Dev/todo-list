@@ -1,3 +1,10 @@
+:root {
+    --theme-color: peru;
+    --theme-hover-color: rgba(205, 133, 63, 0.2);
+    --add-color: rgb(15, 172, 15);
+    --cancel-color: red;
+}
+
 body {
     font-family: monospace;
     /* background-color: white; */
@@ -10,7 +17,7 @@ header {
     height: 100px;
     padding-left: 36px;
     font-size: 3rem;
-    background-color: peru;
+    background-color: var(--theme-color);
     color: white;
     display: flex;
     align-items: center;
@@ -21,16 +28,30 @@ header {
     flex-grow: 1;
 }
 
+.add:hover {
+    color: var(--add-color);
+    border-color: var(--add-color); 
+}
+
+.cancel:hover {
+    color: var(--cancel-color);
+    border-color: var(--cancel-color);
+}
+
+::backdrop {
+    backdrop-filter: blur(3px);
+}
+
 /* Sidebar */
 
 #sidebar {
-    border-right: 3px solid peru;
+    border-right: 3px solid var(--theme-color);
     min-width: 400px;
 } 
 
 #sidebar-project-nav {
     padding: 20px;
-    border-bottom: 3px solid peru;
+    border-bottom: 3px solid var(--theme-color);
     font-size: 2rem;
     /* display: flex;
     flex-direction: column; */
@@ -55,7 +76,7 @@ header {
 
 #home:hover,
 #my-projects-heading:hover {
-    background-color: rgba(205, 133, 63, 0.2);
+    background-color: var(--theme-hover-color);
     border-radius: 10px;
 }
 
@@ -67,9 +88,58 @@ header {
     cursor: pointer;
 }
 
-.add:hover {
-    color: rgb(15, 172, 15);
-    border-color: rgb(15, 172, 15); 
+/* Projects Modals */
+
+.project-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border: 3px solid var(--theme-color);
+}
+
+.project-modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.project-modal label {
+    font-size: 1.1rem;
+}
+
+.project-modal input {
+    border: 1px solid black;
+    height: 30px;
+    padding: 5px;
+}
+
+.project-modal .project-heading {
+    font-size: 1.2rem;
+    text-decoration: underline;
+    text-underline-position: under;
+}
+
+.project-modal .project-title {
+    display: flex;
+    flex-direction: column;
+    gap: 5px
+}
+
+.project-modal .project-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.project-modal button {
+    border: 1px solid black;
+    background-color: transparent;
+    cursor: pointer;
+    width: 80px;
+    padding: 8px 10px;
 }
 
 /* Projects */
