@@ -1,5 +1,6 @@
 import todoList from "./todoList";
 import { setLocalStorage } from "./localStorage";
+import dom from './domHandler';
 
 const todoListHandler = (function() {
     // Home
@@ -29,7 +30,7 @@ const todoListHandler = (function() {
        
         addProjectForm.reset();
         todoList.addProject(projectData);
-        //update DOM
+        dom.updateUI();
     });
 
     addProjectCancel.addEventListener("click", () => {
@@ -47,7 +48,7 @@ const todoListHandler = (function() {
         window.addEventListener("load", () => {
             todoList.remakeTodoList();
             //set active project to home
-            //update dom
+            dom.updateUI();
         });
         window.addEventListener("beforeunload", () => {
             setLocalStorage(todoList.getProjectArray());

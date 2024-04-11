@@ -33,9 +33,15 @@ header {
     border-color: var(--add-color); 
 }
 
-.cancel:hover {
+.cancel:hover,
+.delete:hover {
     color: var(--cancel-color);
     border-color: var(--cancel-color);
+}
+
+.edit:hover {
+    color: var(--theme-color);
+    border-color: var(--theme-color);
 }
 
 ::backdrop {
@@ -153,4 +159,34 @@ header {
     font-size: 1.2rem;
     display: flex;
     flex-direction: column;
+}
+
+.project {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-radius: 10px;
+}
+
+.project:hover {
+    background-color: var(--theme-hover-color);
+    cursor: pointer;
+}
+
+.project-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.project button {
+    width: 80px;
+    padding: 6px 0;
+    background-color: transparent;
+    border: 2px solid black;
+    font-size: 1rem;
+}
+
+.project button:hover {
+    cursor: pointer;
 }
