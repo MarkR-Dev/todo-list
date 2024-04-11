@@ -48,6 +48,11 @@ header {
     backdrop-filter: blur(3px);
 }
 
+#add-project-btn:focus-visible,
+.project button:focus-visible {
+    outline: none;
+}
+
 /* Sidebar */
 
 #sidebar {
@@ -92,10 +97,6 @@ header {
     max-height: 50px;
     background-color: transparent;
     cursor: pointer;
-}
-
-#add-project-btn:focus-visible {
-    outline: none;
 }
 
 /* Projects Modals */
@@ -155,7 +156,8 @@ header {
 /* Projects */
 
 #created-project-nav {
-    padding: 20px;
+    /* padding: 20px; */
+    margin: 20px;
     font-size: 1.2rem;
     display: flex;
     flex-direction: column;

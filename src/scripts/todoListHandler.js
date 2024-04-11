@@ -11,11 +11,19 @@ const todoListHandler = (function() {
     const addProjectModal = document.querySelector("#add-project-modal");
     const addProjectForm = document.querySelector("#add-project-form");
     const addProjectCancel = document.querySelector("#add-project-cancel");
-    
+
+    // Edit Project
+    const editProjectModal = document.querySelector("#edit-project-modal");
+    const editProjectForm = document.querySelector("#edit-project-form");
+    const editProjectCancel = document.querySelector("#edit-project-cancel");
+
+    // Projects Container
+    const projectContainer = document.querySelector("#created-project-nav");
+
     // Home Listener
     homeBtn.addEventListener("click", () => {
         //set home as active project
-        //update dom
+        dom.updateUI();
     });
 
     // Add Project Listeners
@@ -38,9 +46,38 @@ const todoListHandler = (function() {
         addProjectForm.reset();
     });
 
+    // Edit Project Listeners
+    editProjectForm.addEventListener("submit", () => {
+        const newProjectData = {
+            title: document.querySelector("#edit-project-title").value,
+        }
+        editProjectForm.reset();
+        todoList.editProject(todoList.getSelectedProjectID(), newProjectData);
+        dom.updateUI();
+    });
+
+    editProjectCancel.addEventListener("click", () => {
+        editProjectModal.close();
+        editProjectForm.reset();
+    });
+
+    // Projects Container Listener
+    projectContainer.addEventListener("click", (event) => {
+        const projectID = event.target.closest(".project").dataset.projectId;
+        
+        if(event.target.classList.contains("edit")){
+            todoList.setSelectedProjectID(projectID);
+            const project = todoList.getProject(projectID);
+            dom.updateEditProjectForm(project);
+            editProjectModal.showModal();
+        }
+    })
+
+    //---------------------
     document.addEventListener("keydown", event => {
         if(event.key === "Escape"){
             addProjectForm.reset();
+            editProjectForm.reset();
         }
     });
     

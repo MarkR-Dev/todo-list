@@ -1,6 +1,12 @@
 import todoList from "./todoList";
 
 const dom = (function() {
+    function updateHomeTotal(homeProject) {
+        const homeTotal = document.querySelector("#home-total");
+        homeTotal.textContent = "";
+        homeTotal.textContent = homeProject.todoArray.length;
+    }
+
     function createProjectElement(project) {
         const projectDiv = document.createElement("div");
         projectDiv.classList.add("project");
@@ -47,12 +53,20 @@ const dom = (function() {
         })
     }
 
+    function updateEditProjectForm(project) {
+        const editProjectTitle = document.querySelector("#edit-project-title");
+
+        editProjectTitle.value = project.title;
+    }
+
     function updateUI() {
         const todoListArray = todoList.getProjectArray();
+        const homeProject = todoListArray[0];
 
+        updateHomeTotal(homeProject);
         updateProjectsContainer(todoListArray);
     }
-    return { updateUI }
+    return { updateUI, updateEditProjectForm }
 })();
 
 export default dom;
