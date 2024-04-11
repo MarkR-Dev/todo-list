@@ -70,6 +70,11 @@ const todoListHandler = (function() {
             const project = todoList.getProject(projectID);
             dom.updateEditProjectForm(project);
             editProjectModal.showModal();
+        }else if(event.target.classList.contains("delete")){
+            todoList.removeProject(projectID);
+            dom.updateUI();
+        }else if(event.target.closest(".project")){
+            // ---
         }
     })
 
