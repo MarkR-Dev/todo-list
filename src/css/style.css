@@ -88,6 +88,10 @@ header {
     cursor: pointer;
 }
 
+#add-project-btn:focus-visible {
+    outline: none;
+}
+
 /* Projects Modals */
 
 .project-modal {

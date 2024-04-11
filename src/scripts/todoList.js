@@ -7,6 +7,7 @@ const todoList = (function(){
 
     const log = () => {
         console.log(projectArray);
+        console.table(projectArray);
     }
 
     const getProjectArray = () => {
