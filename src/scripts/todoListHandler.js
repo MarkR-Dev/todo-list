@@ -22,7 +22,8 @@ const todoListHandler = (function() {
 
     // Home Listener
     homeBtn.addEventListener("click", () => {
-        //set home as active project
+        const homeProject = todoList.getProjectArray()[0];
+        todoList.setActiveProject(homeProject);
         dom.updateUI();
     });
 
@@ -64,21 +65,21 @@ const todoListHandler = (function() {
     // Projects Container Listener
     projectContainer.addEventListener("click", (event) => {
         const projectID = event.target.closest(".project").dataset.projectId;
-        
+        const project = todoList.getProject(projectID);
+
         if(event.target.classList.contains("edit")){
             todoList.setSelectedProjectID(projectID);
-            const project = todoList.getProject(projectID);
             dom.updateEditProjectForm(project);
             editProjectModal.showModal();
         }else if(event.target.classList.contains("delete")){
             todoList.removeProject(projectID);
             dom.updateUI();
         }else if(event.target.closest(".project")){
-            // ---
+            todoList.setActiveProject(project);
+            dom.updateUI();
         }
     })
 
-    //---------------------
     document.addEventListener("keydown", event => {
         if(event.key === "Escape"){
             addProjectForm.reset();
@@ -89,7 +90,8 @@ const todoListHandler = (function() {
     const init = () => {
         window.addEventListener("load", () => {
             todoList.remakeTodoList();
-            //set active project to home
+            const homeProject = todoList.getProjectArray()[0];
+            todoList.setActiveProject(homeProject);
             dom.updateUI();
         });
         window.addEventListener("beforeunload", () => {

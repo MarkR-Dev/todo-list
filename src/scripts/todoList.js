@@ -5,6 +5,7 @@ import { getLocalStorage } from "./localStorage";
 const todoList = (function(){
     const projectArray = getLocalStorage() || [new Project("Home", uuidv4())];
     let selectedProjectID = null;
+    let activeProject = null;
 
     const log = () => {
         console.log(projectArray);
@@ -29,6 +30,11 @@ const todoList = (function(){
             projectArray[0].removeAllTodos();
             return
         }
+
+        if(projectID === activeProject.projectID){
+            activeProject = projectArray[0];
+        }
+
         projectArray.splice(index, 1);
     }
 
@@ -63,15 +69,24 @@ const todoList = (function(){
         selectedProjectID = projectID;
     }
 
+    const getActiveProject = () => {
+        return activeProject;
+    }
+
+    const setActiveProject = (project) => {
+        activeProject = project;
+    }
+
     const remakeTodoList = () => {
         projectArray.forEach((project, index) => {
             projectArray[index] = new Project(project.title, uuidv4(), project.todoArray);
 
             projectArray[index].remakeProject();
         })
+        activeProject = projectArray[0];
     }
 
-    return { log, getProjectArray, addProject, removeProject, editProject, getProject, moveTodoToNewProject, remakeTodoList, getSelectedProjectID, setSelectedProjectID, }
+    return { log, getProjectArray, addProject, removeProject, editProject, getProject, moveTodoToNewProject, remakeTodoList, getSelectedProjectID, setSelectedProjectID, getActiveProject, setActiveProject, }
 })();
 
 export default todoList;
