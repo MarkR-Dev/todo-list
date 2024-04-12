@@ -59,12 +59,20 @@ const dom = (function() {
         editProjectTitle.value = project.title;
     }
 
+    function updateActiveProjectTitle(activeProject) {
+        const projectTitle = document.querySelector("#active-project-title h2");
+        projectTitle.textContent = "";
+        projectTitle.textContent = activeProject.title;
+    }
+
     function updateUI() {
         const todoListArray = todoList.getProjectArray();
         const homeProject = todoListArray[0];
-
+        const activeProject = todoList.getActiveProject();
+        
         updateHomeTotal(homeProject);
         updateProjectsContainer(todoListArray);
+        updateActiveProjectTitle(activeProject);
     }
     return { updateUI, updateEditProjectForm }
 })();

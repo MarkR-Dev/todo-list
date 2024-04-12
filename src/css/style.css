@@ -7,7 +7,6 @@
 
 body {
     font-family: monospace;
-    /* background-color: white; */
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -28,18 +27,21 @@ header {
     flex-grow: 1;
 }
 
-.add:hover {
+.add:hover,
+#add-todo:hover {
     color: var(--add-color);
     border-color: var(--add-color); 
 }
 
 .cancel:hover,
-.delete:hover {
+.delete:hover,
+#remove-project:hover {
     color: var(--cancel-color);
     border-color: var(--cancel-color);
 }
 
-.edit:hover {
+.edit:hover,
+#active-project-buttons .sort:hover {
     color: var(--theme-color);
     border-color: var(--theme-color);
 }
@@ -64,8 +66,6 @@ header {
     padding: 20px;
     border-bottom: 3px solid var(--theme-color);
     font-size: 2rem;
-    /* display: flex;
-    flex-direction: column; */
 }
 
 #home {
@@ -156,7 +156,6 @@ header {
 /* Projects */
 
 #created-project-nav {
-    /* padding: 20px; */
     margin: 20px;
     font-size: 1.2rem;
     display: flex;
@@ -191,4 +190,47 @@ header {
 
 .project button:hover {
     cursor: pointer;
+}
+
+/* Active Project Container */
+
+#active-project-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#active-project {
+    display: flex;
+    gap: 20px;
+    padding: 30px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#active-project h2 {
+    font-size: 1.5rem;
+    min-width: 200px;
+}
+
+#active-project-buttons {
+    display:flex;
+    gap: 20px;
+}
+
+#active-project-buttons button {
+    width: 150px;
+    font-size: 1rem;
+    padding: 8px 10px;
+    background-color: transparent;
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+#todo-display {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }

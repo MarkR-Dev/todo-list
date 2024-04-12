@@ -6,6 +6,7 @@ const todoList = (function(){
     const projectArray = getLocalStorage() || [new Project("Home", uuidv4())];
     let selectedProjectID = null;
     let activeProject = null;
+    let selectedTodoID = null;
 
     const log = () => {
         console.log(projectArray);
@@ -77,6 +78,14 @@ const todoList = (function(){
         activeProject = project;
     }
 
+    const getSelectedTodoID = () => {
+        return selectedTodoID;
+    }
+
+    const setSelectedTodoID = (todoID) => {
+        selectedTodoID = todoID;
+    }
+
     const remakeTodoList = () => {
         projectArray.forEach((project, index) => {
             projectArray[index] = new Project(project.title, uuidv4(), project.todoArray);
@@ -86,7 +95,7 @@ const todoList = (function(){
         activeProject = projectArray[0];
     }
 
-    return { log, getProjectArray, addProject, removeProject, editProject, getProject, moveTodoToNewProject, remakeTodoList, getSelectedProjectID, setSelectedProjectID, getActiveProject, setActiveProject, }
+    return { log, getProjectArray, addProject, removeProject, editProject, getProject, moveTodoToNewProject, remakeTodoList, getSelectedProjectID, setSelectedProjectID, getActiveProject, setActiveProject, getSelectedTodoID, setSelectedTodoID }
 })();
 
 export default todoList;
