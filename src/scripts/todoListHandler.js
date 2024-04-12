@@ -20,6 +20,12 @@ const todoListHandler = (function() {
     // Projects Container
     const projectContainer = document.querySelector("#created-project-nav");
 
+    // Add Todo
+    const addTodoBtn = document.querySelector("#add-todo");
+    const addTodoModal = document.querySelector("#add-todo-modal");
+    const addTodoCancel = document.querySelector("#add-todo-cancel");
+    const addTodoForm = document.querySelector("#add-todo-form");
+
     // Home Listener
     homeBtn.addEventListener("click", () => {
         const homeProject = todoList.getProjectArray()[0];
@@ -78,12 +84,40 @@ const todoListHandler = (function() {
             todoList.setActiveProject(project);
             dom.updateUI();
         }
-    })
+    });
+
+    addTodoBtn.addEventListener("click", () => {
+        dom.updateFormProjectSelect(todoList.getProjectArray());
+        dom.updateAddTodoForm();
+        addTodoModal.showModal();
+    });
+
+    addTodoCancel.addEventListener("click", () => {
+        addTodoModal.close();
+        addTodoForm.reset();
+    });
+
+    addTodoForm.addEventListener("submit", () => {
+        const projectID = document.querySelector("#add-todo-project").value;
+        const todoData = {
+            title: document.querySelector("#add-todo-title").value,
+            description: document.querySelector("#add-todo-description").value,
+            dueDate: document.querySelector("#add-todo-due").value,
+            priority: document.querySelector("#add-todo-priority").value,
+            note: document.querySelector("#add-todo-note").value,
+            isComplete: document.querySelector("#add-todo-completed").checked,
+        }
+        const project = todoList.getProject(projectID);
+        project.addTodo(todoData);
+        addTodoForm.reset();
+        dom.updateUI();
+    });
 
     document.addEventListener("keydown", event => {
         if(event.key === "Escape"){
             addProjectForm.reset();
             editProjectForm.reset();
+            addTodoForm.reset();
         }
     });
     

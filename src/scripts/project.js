@@ -1,6 +1,8 @@
 import Todo from "./todo";
 import { v4 as uuidv4 } from "uuid";
 
+//format the date via datefns when creating/editing todos
+
 class Project {
     constructor(title, projectID, todoArray = []) {
         this.title = title;

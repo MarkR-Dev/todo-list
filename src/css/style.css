@@ -28,14 +28,16 @@ header {
 }
 
 .add:hover,
-#add-todo:hover {
+#add-todo:hover,
+#add-todo-submit:hover {
     color: var(--add-color);
     border-color: var(--add-color); 
 }
 
 .cancel:hover,
 .delete:hover,
-#remove-project:hover {
+#remove-project:hover,
+#add-todo-cancel:hover {
     color: var(--cancel-color);
     border-color: var(--cancel-color);
 }
@@ -51,7 +53,8 @@ header {
 }
 
 #add-project-btn:focus-visible,
-.project button:focus-visible {
+.project button:focus-visible,
+#add-todo:focus-visible {
     outline: none;
 }
 
@@ -277,12 +280,12 @@ header {
     padding: 5px;
     border: 2px solid black;
     background-color: transparent;
+    cursor: pointer;
 }
 
 .view:hover {
     color: lightseagreen;
     border-color: lightseagreen;
-    cursor: pointer;
 }
 
 .low {
@@ -299,4 +302,73 @@ header {
 
 .completed {
     text-decoration: line-through;
+}
+
+/* Todo Modals */
+
+.todo-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border: 3px solid peru;
+}
+
+.todo-modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.todo-modal .todo-heading {
+    font-size: 1.2rem;
+    text-decoration: underline;
+    text-underline-position: under;
+}
+
+.todo-modal form label {
+    font-size: 1.1rem;
+}
+
+.todo-modal form > div:not(:first-child, :last-child, :nth-last-child(2)){
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+.todo-completed {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.todo-modal form input,
+.todo-modal form select {
+    border: 1px solid black;
+    height: 30px;
+    padding: 5px;
+    background-color: transparent;
+}
+
+.todo-modal form textarea {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.todo-modal .todo-modal-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.todo-modal .todo-modal-buttons button{
+    border: 1px solid black;
+    background-color: transparent;
+    cursor: pointer;
+    width: 80px;
+    padding: 8px 10px;
 }

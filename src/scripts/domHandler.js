@@ -65,19 +65,17 @@ const dom = (function() {
         projectTitle.textContent = activeProject.title;
     }
 
-    //test this------------
     function createTodoElement(todo) {
         const todoDiv = document.createElement("div");
         todoDiv.setAttribute("data-todo-id", `${todo.todoID}`);
         todoDiv.classList.add("todo");
 
-        //test this later
         if(todo.priority === "1"){
             todoDiv.classList.add("low");
         }else if(todo.priority === "2"){
             todoDiv.classList.add("medium");
         }else{
-            todoDiv.classList.add("3");
+            todoDiv.classList.add("high");
         }
 
         const checkboxDiv = document.createElement("div");
@@ -135,7 +133,6 @@ const dom = (function() {
         return todoDiv
     }
 
-    //test this------------
     function updateActiveProject(project) {
         const todoDisplayContainer = document.querySelector("#todo-display");
         todoDisplayContainer.textContent = "";
@@ -143,6 +140,32 @@ const dom = (function() {
         project.todoArray.forEach(todo => {
             todoDisplayContainer.appendChild(createTodoElement(todo));
         });
+    }
+
+    function createOptionElement(project){
+        const option = document.createElement("option");
+        option.setAttribute("value", `${project.projectID}`);
+        option.textContent = `${project.title}`;
+        return option;
+    }
+
+    function updateFormProjectSelect(projectArray){
+        const addTodoSelectDropdown = document.querySelector("#add-todo-project");
+        addTodoSelectDropdown.textContent = "";
+        projectArray.forEach(project => {
+            addTodoSelectDropdown.appendChild(createOptionElement(project));
+        });
+    }
+
+    function updateAddTodoForm(){
+        const addTodoFormProject = document.querySelector("#add-todo-project");
+        const optionsArray = [...addTodoFormProject.options];
+
+        for(let i = 0; i < optionsArray.length; i++){
+            if(optionsArray[i].value === todoList.getActiveProject().projectID){
+                optionsArray[i].selected = true;
+            }
+        }
     }
 
     function updateUI() {
@@ -155,7 +178,7 @@ const dom = (function() {
         updateActiveProjectTitle(activeProject);
         updateActiveProject(activeProject);
     }
-    return { updateUI, updateEditProjectForm }
+    return { updateUI, updateEditProjectForm, updateFormProjectSelect, updateAddTodoForm  }
 })();
 
 export default dom;
