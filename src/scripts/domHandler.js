@@ -149,7 +149,7 @@ const dom = (function() {
         return option;
     }
 
-    function updateFormProjectSelect(projectArray){
+    function updateAddFormProjectSelect(projectArray){
         const addTodoSelectDropdown = document.querySelector("#add-todo-project");
         addTodoSelectDropdown.textContent = "";
         projectArray.forEach(project => {
@@ -178,7 +178,7 @@ const dom = (function() {
         updateActiveProjectTitle(activeProject);
         updateActiveProject(activeProject);
     }
-    return { updateUI, updateEditProjectForm, updateFormProjectSelect, updateAddTodoForm  }
+    return { updateUI, updateEditProjectForm, updateAddFormProjectSelect, updateAddTodoForm  }
 })();
 
 export default dom;

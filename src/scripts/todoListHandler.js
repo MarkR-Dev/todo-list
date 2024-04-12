@@ -26,6 +26,11 @@ const todoListHandler = (function() {
     const addTodoCancel = document.querySelector("#add-todo-cancel");
     const addTodoForm = document.querySelector("#add-todo-form");
 
+    //sort1+2
+
+    // Remove Project
+    const removeProjectBtn = document.querySelector("#remove-project");
+
     // Home Listener
     homeBtn.addEventListener("click", () => {
         const homeProject = todoList.getProjectArray()[0];
@@ -42,7 +47,6 @@ const todoListHandler = (function() {
         const projectData = {
             title: document.querySelector("#add-project-title").value,
         }
-       
         addProjectForm.reset();
         todoList.addProject(projectData);
         dom.updateUI();
@@ -87,7 +91,7 @@ const todoListHandler = (function() {
     });
 
     addTodoBtn.addEventListener("click", () => {
-        dom.updateFormProjectSelect(todoList.getProjectArray());
+        dom.updateAddFormProjectSelect(todoList.getProjectArray());
         dom.updateAddTodoForm();
         addTodoModal.showModal();
     });
@@ -112,6 +116,15 @@ const todoListHandler = (function() {
         addTodoForm.reset();
         dom.updateUI();
     });
+
+    //sort1+2
+
+    // Remove Project Listener
+    removeProjectBtn.addEventListener("click", () => {
+        const activeProject = todoList.getActiveProject();
+        todoList.removeProject(activeProject.projectID);
+        dom.updateUI();
+    })
 
     document.addEventListener("keydown", event => {
         if(event.key === "Escape"){
