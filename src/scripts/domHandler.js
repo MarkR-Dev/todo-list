@@ -65,6 +65,86 @@ const dom = (function() {
         projectTitle.textContent = activeProject.title;
     }
 
+    //test this------------
+    function createTodoElement(todo) {
+        const todoDiv = document.createElement("div");
+        todoDiv.setAttribute("data-todo-id", `${todo.todoID}`);
+        todoDiv.classList.add("todo");
+
+        //test this later
+        if(todo.priority === "1"){
+            todoDiv.classList.add("low");
+        }else if(todo.priority === "2"){
+            todoDiv.classList.add("medium");
+        }else{
+            todoDiv.classList.add("3");
+        }
+
+        const checkboxDiv = document.createElement("div");
+        checkboxDiv.classList.add("checkbox");
+
+        const checkboxInput = document.createElement("input");
+        checkboxInput.setAttribute("type", "checkbox");
+        checkboxInput.setAttribute("name", "completed");
+        checkboxInput.classList.add("checkbox-input");
+        checkboxDiv.appendChild(checkboxInput);
+
+        const infoDiv = document.createElement("div");
+        infoDiv.classList.add("info");
+
+        if(todo.isComplete){
+            infoDiv.classList.add("completed");
+            checkboxInput.setAttribute("checked", true);
+        }
+
+        const infoTitleDiv = document.createElement("div");
+        infoTitleDiv.classList.add("todo-title");
+        infoTitleDiv.textContent = todo.title;
+        infoDiv.appendChild(infoTitleDiv);
+
+        const infoDescDiv = document.createElement("div");
+        infoDescDiv.classList.add("todo-desc");
+        infoDescDiv.textContent = todo.description;
+        infoDiv.appendChild(infoDescDiv);
+
+        const buttonsDiv = document.createElement("div");
+        buttonsDiv.classList.add("todo-buttons");
+
+        const viewBtn = document.createElement("button");
+        viewBtn.classList.add("view");
+        viewBtn.setAttribute("type", "button");
+        viewBtn.textContent = "View";
+        buttonsDiv.appendChild(viewBtn);
+
+        const editBtn = document.createElement("button");
+        editBtn.classList.add("edit");
+        editBtn.setAttribute("type", "button");
+        editBtn.textContent = "Edit";
+        buttonsDiv.appendChild(editBtn);
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.classList.add("delete");
+        deleteBtn.setAttribute("type", "button");
+        deleteBtn.textContent = "Delete";
+        buttonsDiv.appendChild(deleteBtn);
+
+        todoDiv.appendChild(checkboxDiv);
+        todoDiv.appendChild(infoDiv);
+        todoDiv.appendChild(buttonsDiv);
+
+        return todoDiv
+    }
+
+    //test this------------
+    function updateActiveProject(project) {
+        const todoDisplayContainer = document.querySelector("#todo-display");
+        todoDisplayContainer.textContent = "";
+
+        project.todoArray.forEach(todo => {
+            todoDisplayContainer.appendChild(createTodoElement(todo));
+        });
+    }
+
     function updateUI() {
         const todoListArray = todoList.getProjectArray();
         const homeProject = todoListArray[0];
@@ -73,6 +153,7 @@ const dom = (function() {
         updateHomeTotal(homeProject);
         updateProjectsContainer(todoListArray);
         updateActiveProjectTitle(activeProject);
+        updateActiveProject(activeProject);
     }
     return { updateUI, updateEditProjectForm }
 })();

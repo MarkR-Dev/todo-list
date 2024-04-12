@@ -234,3 +234,69 @@ header {
     flex-direction: column;
     gap: 10px;
 }
+
+/* Todo */
+
+.todo {
+    display: flex;
+    padding: 10px 0;
+    border-radius: 8px;
+    background-color: var(--theme-hover-color);
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    margin: 0 16px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.info .todo-title {
+    font-size: 1.2rem;
+}
+
+.info .todo-desc {
+    font-size: 1rem;
+}
+
+.todo-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 16px;
+}
+
+.todo-buttons button {
+    width: 80px;
+    padding: 5px;
+    border: 2px solid black;
+    background-color: transparent;
+}
+
+.view:hover {
+    color: lightseagreen;
+    border-color: lightseagreen;
+    cursor: pointer;
+}
+
+.low {
+    border-left: 8px solid green;
+}
+
+.medium {
+    border-left: 8px solid yellow;
+}
+
+.high {
+    border-left: 8px solid red;
+}
+
+.completed {
+    text-decoration: line-through;
+}

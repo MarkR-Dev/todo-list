@@ -7,7 +7,7 @@ const todoList = (function(){
     let selectedProjectID = null;
     let activeProject = null;
     let selectedTodoID = null;
-
+    
     const log = () => {
         console.log(projectArray);
         console.table(projectArray);
