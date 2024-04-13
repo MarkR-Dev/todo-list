@@ -149,7 +149,7 @@ const dom = (function() {
         return option;
     }
 
-    function updateAddFormProjectSelect(projectArray){
+    function updateFormProjectSelect(projectArray){
         const addTodoSelectDropdown = document.querySelector("#add-todo-project");
         addTodoSelectDropdown.textContent = "";
         projectArray.forEach(project => {
@@ -168,6 +168,37 @@ const dom = (function() {
         }
     }
 
+    function updateViewTodo(todo) {
+        const todoTitle = document.querySelector("#view-todo-title p");
+        const todoDesc = document.querySelector("#view-todo-description p");
+        const todoDue = document.querySelector("#view-todo-due p");
+        const todoPriority = document.querySelector("#view-todo-priority p");
+        const todoNote = document.querySelector("#view-todo-note p");
+        const todoProject = document.querySelector("#view-todo-project p");
+        const todoCompleted = document.querySelector("#view-todo-completed p");
+
+        todoTitle.textContent = todo.title;
+        todoDesc.textContent = todo.description;
+        todoDue.textContent = todo.dueDate;
+        
+        if(todo.priority === "1"){
+            todoPriority.textContent = "Low";
+        }else if(todo.priority === "2"){
+            todoPriority.textContent = "Medium";
+        }else{
+            todoPriority.textContent = "High";
+        }
+
+        todoNote.textContent = todo.note;
+        todoProject.textContent = todoList.getActiveProject().title;
+
+        if(todo.isComplete){
+            todoCompleted.textContent = "Yes";
+        }else{
+            todoCompleted.textContent = "No";
+        }
+    }
+
     function updateUI() {
         const todoListArray = todoList.getProjectArray();
         const homeProject = todoListArray[0];
@@ -178,7 +209,8 @@ const dom = (function() {
         updateActiveProjectTitle(activeProject);
         updateActiveProject(activeProject);
     }
-    return { updateUI, updateEditProjectForm, updateAddFormProjectSelect, updateAddTodoForm  }
+
+    return { updateUI, updateEditProjectForm, updateFormProjectSelect, updateAddTodoForm, updateViewTodo  }
 })();
 
 export default dom;

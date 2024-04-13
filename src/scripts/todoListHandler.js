@@ -31,6 +31,13 @@ const todoListHandler = (function() {
     // Remove Project
     const removeProjectBtn = document.querySelector("#remove-project");
 
+    // Todo Display Container
+    const todoDisplayContainer = document.querySelector("#todo-display");
+
+    // View Todo
+    const viewTodoModal = document.querySelector("#view-todo-modal");
+    const viewTodoCancel = document.querySelector("#view-todo-cancel");
+
     // Home Listener
     homeBtn.addEventListener("click", () => {
         const homeProject = todoList.getProjectArray()[0];
@@ -90,8 +97,9 @@ const todoListHandler = (function() {
         }
     });
 
+    // Add Todo Listeners
     addTodoBtn.addEventListener("click", () => {
-        dom.updateAddFormProjectSelect(todoList.getProjectArray());
+        dom.updateFormProjectSelect(todoList.getProjectArray());
         dom.updateAddTodoForm();
         addTodoModal.showModal();
     });
@@ -124,6 +132,26 @@ const todoListHandler = (function() {
         const activeProject = todoList.getActiveProject();
         todoList.removeProject(activeProject.projectID);
         dom.updateUI();
+    })
+
+    // Todo Display Container
+    todoDisplayContainer.addEventListener("click", (event) => {
+        if(event.target.id === "todo-display"){
+            return
+        }
+
+        const todoID = event.target.closest(".todo").dataset.todoId; 
+        const project = todoList.getActiveProject();
+       
+        if(event.target.classList.contains("view")){
+            dom.updateViewTodo(project.getTodo(todoID));
+            viewTodoModal.showModal();
+        }
+    });
+
+    // View Todo Listener
+    viewTodoCancel.addEventListener("click", () => {
+        viewTodoModal.close();
     })
 
     document.addEventListener("keydown", event => {
