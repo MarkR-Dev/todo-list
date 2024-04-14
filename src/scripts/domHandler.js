@@ -196,7 +196,12 @@ const dom = (function() {
             todoPriority.textContent = "High";
         }
 
-        todoNote.textContent = todo.note;
+        if(!todo.note){
+            todoNote.textContent = "None";
+        }else{
+            todoNote.textContent = todo.note;
+        }
+        
         todoProject.textContent = todoList.getActiveProject().title;
 
         if(todo.isComplete){

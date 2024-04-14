@@ -156,6 +156,12 @@ const todoListHandler = (function() {
             dom.updateFormProjectSelect(todoList.getProjectArray());
             dom.updateEditTodoForm(project.getTodo(todoID));
             editTodoModal.showModal();
+        }else if(event.target.classList.contains("delete")){
+            project.removeTodo(todoID);
+            dom.updateUI();
+        }else if(event.target.classList.contains("checkbox-input")){
+            event.target.parentElement.nextSibling.classList.toggle("completed");
+            project.toggleTodoCompleted(todoID);
         }
     });
 
