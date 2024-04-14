@@ -26,7 +26,9 @@ const todoListHandler = (function() {
     const addTodoCancel = document.querySelector("#add-todo-cancel");
     const addTodoForm = document.querySelector("#add-todo-form");
 
-    //sort1+2
+    // Sort Project
+    const sortByPriority = document.querySelector("#sort-priority");
+    const sortByDate = document.querySelector("#sort-date");
 
     // Remove Project
     const removeProjectBtn = document.querySelector("#remove-project");
@@ -130,7 +132,18 @@ const todoListHandler = (function() {
         dom.updateUI();
     });
 
-    //sort1+2
+    // Sorting Listeners
+    sortByPriority.addEventListener("click", () => {
+        const project = todoList.getActiveProject();
+        project.sortByPriority();
+        dom.updateUI();
+    });
+
+    sortByDate.addEventListener("click", () => {
+        const project = todoList.getActiveProject();
+        project.sortByDate();
+        dom.updateUI();
+    });
 
     // Remove Project Listener
     removeProjectBtn.addEventListener("click", () => {

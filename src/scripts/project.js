@@ -1,6 +1,6 @@
 import Todo from "./todo";
 import { v4 as uuidv4 } from "uuid";
-import { format } from "date-fns";
+import { compareAsc } from "date-fns";
 
 class Project {
     constructor(title, projectID, todoArray = []) {
@@ -68,6 +68,19 @@ class Project {
         this.todoArray.forEach((todo, index) => {
             const { title, description, dueDate, priority, note, isComplete } = todo;
             this.todoArray[index] = new Todo(title, description, dueDate, priority, note, this.projectID, isComplete, uuidv4());
+        })
+    }
+
+    sortByPriority() {
+        this.todoArray.sort((a, b) => {
+            return +b.priority - +a.priority;
+        });
+        
+    }
+
+    sortByDate() {
+        this.todoArray.sort((a, b) => {
+            return compareAsc(a.dueDate, b.dueDate);
         })
     }
 }
