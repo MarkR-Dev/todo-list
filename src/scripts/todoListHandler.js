@@ -183,7 +183,7 @@ const todoListHandler = (function() {
         viewTodoModal.close();
     });
 
-    // Edit Todo Listener
+    // Edit Todo Listeners
     editTodoCancel.addEventListener("click", () => {
         editTodoModal.close();
         editTodoForm.reset();

@@ -1,10 +1,9 @@
 # todo-list
-datefns
-uuid
-local storage
-webpack
-npm
-es6 modules
-JSON
-OOP
-organising code
+A Todo list project to practice the following concepts:
+- Using npm packages (Date-fns, uuid)
+- Local Storage
+- Webpack
+- ES6 Modules
+- JSON
+- OOP
+- Organising Code
