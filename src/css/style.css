@@ -29,7 +29,8 @@ header {
 
 .add:hover,
 #add-todo:hover,
-#add-todo-submit:hover {
+#add-todo-submit:hover,
+#edit-todo-submit:hover {
     color: var(--add-color);
     border-color: var(--add-color); 
 }
@@ -38,7 +39,8 @@ header {
 .delete:hover,
 #remove-project:hover,
 #add-todo-cancel:hover,
-#view-todo-cancel:hover {
+#view-todo-cancel:hover,
+#edit-todo-cancel:hover {
     color: var(--cancel-color);
     border-color: var(--cancel-color);
 }

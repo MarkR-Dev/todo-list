@@ -1,4 +1,5 @@
 import todoList from "./todoList";
+import { format } from "date-fns";
 
 const dom = (function() {
     function updateHomeTotal(homeProject) {
@@ -155,6 +156,12 @@ const dom = (function() {
         projectArray.forEach(project => {
             addTodoSelectDropdown.appendChild(createOptionElement(project));
         });
+
+        const editTodoSelectDropdown = document.querySelector("#edit-todo-project");
+        editTodoSelectDropdown.textContent = "";
+        projectArray.forEach(project => {
+            editTodoSelectDropdown.appendChild(createOptionElement(project));
+        });
     }
 
     function updateAddTodoForm(){
@@ -179,7 +186,7 @@ const dom = (function() {
 
         todoTitle.textContent = todo.title;
         todoDesc.textContent = todo.description;
-        todoDue.textContent = todo.dueDate;
+        todoDue.textContent = format(todo.dueDate, "dd/MM/yyyy");
         
         if(todo.priority === "1"){
             todoPriority.textContent = "Low";
@@ -199,6 +206,38 @@ const dom = (function() {
         }
     }
 
+    function updateEditTodoForm(todo) {
+        const editTodoFormTitle = document.querySelector("#edit-todo-title");
+        editTodoFormTitle.value = `${todo.title}`;
+
+        const editTodoFormDesc = document.querySelector("#edit-todo-description");
+        editTodoFormDesc.value = `${todo.description}`;
+
+        const editTodoFormDue = document.querySelector("#edit-todo-due");
+        editTodoFormDue.value = `${todo.dueDate}`;
+
+        const editTodoFormPriority = document.querySelector("#edit-todo-priority");
+        editTodoFormPriority.value = `${todo.priority}`;
+
+        const editTodoFormNote = document.querySelector("#edit-todo-note");
+        editTodoFormNote.value = `${todo.note}`;
+
+        const editTodoFormProject = document.querySelector("#edit-todo-project");
+        const optionsArray = [...editTodoFormProject.options];
+        
+        const projectID = todoList.getActiveProject().projectID;
+        for(let i = 0; i < optionsArray.length; i++){
+            if(optionsArray[i].value === projectID){
+                optionsArray[i].selected = true;
+            }
+        }
+
+        const editTodoFormCompleted = document.querySelector("#edit-todo-completed");
+        if(todo.isComplete){
+            editTodoFormCompleted.checked = true;
+        }
+    }
+
     function updateUI() {
         const todoListArray = todoList.getProjectArray();
         const homeProject = todoListArray[0];
@@ -210,7 +249,7 @@ const dom = (function() {
         updateActiveProject(activeProject);
     }
 
-    return { updateUI, updateEditProjectForm, updateFormProjectSelect, updateAddTodoForm, updateViewTodo  }
+    return { updateUI, updateEditProjectForm, updateFormProjectSelect, updateAddTodoForm, updateViewTodo, updateEditTodoForm }
 })();
 
 export default dom;

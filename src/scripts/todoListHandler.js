@@ -38,6 +38,11 @@ const todoListHandler = (function() {
     const viewTodoModal = document.querySelector("#view-todo-modal");
     const viewTodoCancel = document.querySelector("#view-todo-cancel");
 
+    // Edit Todo
+    const editTodoModal = document.querySelector("#edit-todo-modal");
+    const editTodoCancel = document.querySelector("#edit-todo-cancel");
+    const editTodoForm = document.querySelector("#edit-todo-form");
+
     // Home Listener
     homeBtn.addEventListener("click", () => {
         const homeProject = todoList.getProjectArray()[0];
@@ -146,19 +151,54 @@ const todoListHandler = (function() {
         if(event.target.classList.contains("view")){
             dom.updateViewTodo(project.getTodo(todoID));
             viewTodoModal.showModal();
+        }else if(event.target.classList.contains("edit")){
+            todoList.setSelectedTodoID(todoID);
+            dom.updateFormProjectSelect(todoList.getProjectArray());
+            dom.updateEditTodoForm(project.getTodo(todoID));
+            editTodoModal.showModal();
         }
     });
 
     // View Todo Listener
     viewTodoCancel.addEventListener("click", () => {
         viewTodoModal.close();
-    })
+    });
+
+    // Edit Todo Listener
+    editTodoCancel.addEventListener("click", () => {
+        editTodoModal.close();
+        editTodoForm.reset();
+    });
+
+    editTodoForm.addEventListener("submit", () => {
+        const todoID = todoList.getSelectedTodoID();
+        const project = todoList.getActiveProject();
+        const newTodoData = {
+            title: document.querySelector("#edit-todo-title").value,
+            description: document.querySelector("#edit-todo-description").value,
+            dueDate: document.querySelector("#edit-todo-due").value,
+            priority: document.querySelector("#edit-todo-priority").value,
+            note: document.querySelector("#edit-todo-note").value,
+            isComplete: document.querySelector("#edit-todo-completed").checked,
+            projectID: document.querySelector("#edit-todo-project").value,
+        }
+        
+        if(newTodoData.projectID !== project.projectID){
+            project.removeTodo(todoID);
+            todoList.moveTodoToNewProject(newTodoData, newTodoData.projectID);
+        }else{
+            project.editTodo(todoID, newTodoData);
+        }
+
+        dom.updateUI();
+    });
 
     document.addEventListener("keydown", event => {
         if(event.key === "Escape"){
             addProjectForm.reset();
             editProjectForm.reset();
             addTodoForm.reset();
+            editTodoForm.reset();
         }
     });
     
@@ -169,6 +209,7 @@ const todoListHandler = (function() {
             todoList.setActiveProject(homeProject);
             dom.updateUI();
         });
+
         window.addEventListener("beforeunload", () => {
             setLocalStorage(todoList.getProjectArray());
         });

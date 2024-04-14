@@ -14,8 +14,7 @@ class Project {
     }
 
     addTodo(todoDataObj){
-        const { title, description, priority, note, isComplete } = todoDataObj;
-        const dueDate = format(todoDataObj.dueDate, "dd/MM/yyyy");
+        const { title, description, priority, dueDate, note, isComplete } = todoDataObj;
         const todo = new Todo(title, description, dueDate, priority, note, this.projectID, isComplete, uuidv4());
         this.todoArray.push(todo);
     }
@@ -43,7 +42,7 @@ class Project {
             const todo = this.todoArray[index];
             todo.title = newTodoData.title;
             todo.description = newTodoData.description;
-            todo.dueDate = format(newTodoData.dueDate, "dd/MM/yyyy");
+            todo.dueDate = newTodoData.dueDate;
             todo.priority = newTodoData.priority;
             todo.note = newTodoData.note;
             todo.isComplete = newTodoData.isComplete;
